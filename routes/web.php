@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Models\Course;
+use Illuminate\Support\Facades\Route;/*
 
-/*
+
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
@@ -26,10 +27,17 @@ Route::group(['middleware' => ['auth']], function() {
 Route::group(['middleware' => ['auth', 'role:user']], function() { 
     Route::get('/dashboard/myprofile', 'App\Http\Controllers\DashboardController@myprofile')->name('dashboard.myprofile');
 });
-// for teacher
-Route::group(['middleware' => ['auth', 'role:teacher']], function() { 
-    Route::get('/dashboard/postcraete', 'App\Http\Controllers\DashboardController@postcraete')
-    ->name('dashboard.postcraete');
+Route::group(['middleware' => ['auth', 'role:user']], function() { 
+    Route::get('/dashboard/myprofile', 'App\Http\Controllers\DashboardController@myprofile')->name('dashboard.myprofile');
+});
+
+// for blogwriters
+Route::group(['middleware' => ['auth', 'role:blogwriter']], function() { 
+    Route::get('/dashboard/postcreate', 'App\Http\Controllers\DashboardController@postcreate')->name('dashboard.postcreate');
+});
+Route::get('/test', function () {
+    $courses = Course::all();
+    return view('dashboard')->with('courses',$courses);
 });
 
 require __DIR__.'/auth.php';

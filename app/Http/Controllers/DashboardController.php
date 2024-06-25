@@ -8,20 +8,20 @@ use Illuminate\Support\Facades\Auth;
 class DashboardController extends Controller
 {
     public function index()
-   {
-       if(Auth::user()->hasRole('user')){
+    {
+        if (Auth::user()->hasRole('user')) {
             return view('userdash');
-       }elseif(Auth::user()->hasRole('teacher')){
+        } elseif (Auth::user()->hasRole('teacher')) {
             return view('teacherdash');
-       }elseif(Auth::user()->hasRole('admin')){
-        return view('dashboard');
-   }
-   }
-   public function myprofile()
-   {
-    return view('myprofile');
-   }
-   public function postcraete(){
-     return view('postcreate');
-   }
+        } elseif (Auth::user()->hasRole('admin')) {
+            return view('dashboard');
+        }
+    }
+
+
+    public function myprofile()
+    {
+        return view('myprofile');
+    }
+
 }

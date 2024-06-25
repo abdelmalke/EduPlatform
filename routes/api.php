@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CourseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +18,13 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::get('/',function(Request $request){
+    return response()->json(['message'=>"Welcome to API"]);
+});
+Route::get('/courses', [CourseController::class, 'index']);
+
+Route::post('/courses', [CourseController::class, 'upload']);
+
+Route::put('/courses/edit/{id}', [CourseController::class, 'edit']);
+
+Route::delete('/courses/edit/{id}', [CourseController::class, 'delete']);
